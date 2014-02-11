@@ -1,0 +1,3 @@
+1、执行 `./generate_random_points.rb 300 > points` 生成300个随机点，横纵坐标均为0到200
+2、编译SortDistance.java类。
+3、执行SortDistance，排序结果将会输出到命令行。由于记录过多，推荐利用重定向将结果输出到文件中。
