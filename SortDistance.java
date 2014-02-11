@@ -8,13 +8,21 @@ public class SortDistance {
     SortDistance sd = new SortDistance();
     PointList points = PointList.generatePointsListByFile(CONFIG_FILE_PATH);
     DistanceTable distanceTable = DistanceTable.generateDistanceList(points);
+    DistanceTable distanceTable2 = (DistanceTable) distanceTable.clone();
 
-    quickSortDistanceTable(distanceTable, 0, distanceTable.size() - 1);
+    long quickSortExecTime = quickSortDistanceTable(distanceTable, 0, distanceTable.size() - 1);
+    long bubbleSortExecTime = bubbleSortDistanceTable(distanceTable2);
+
+    System.err.println("快速排序执行时间：" + quickSortExecTime + "\n");
+    System.err.println("冒泡排序执行时间：" + bubbleSortExecTime + "\n");
+
     distanceTable.print();
+    distanceTable2.print();
   }
 
   //  根据题目推测排序量会大，因此使用快速排序。
-  public static void quickSortDistanceTable(DistanceTable a, int left, int right) {
+  public static long quickSortDistanceTable(DistanceTable a, int left, int right) {
+    long startAt = System.currentTimeMillis();
     int i, j;
     DistanceRecord temp;
 
@@ -43,6 +51,28 @@ public class SortDistance {
       quickSortDistanceTable(a, left, i - 1);
       quickSortDistanceTable(a, i + 1, right);
     }
+    long endAt = System.currentTimeMillis();
+    long execTime = (endAt - startAt)/1000;
+    return execTime;
+  }
+
+  //用作对比的冒泡排序
+  public static long bubbleSortDistanceTable(DistanceTable a) {
+    long startAt = System.currentTimeMillis();
+    DistanceRecord temp;
+
+    for (int i=0;i<a.size();i++) {
+      for (int j=i+1;j<a.size();j++) {
+        if (a.get(i).distance > a.get(j).distance) {
+          temp = a.get(i);
+          a.set(i, a.get(j));
+          a.set(j, temp);
+        }
+      }
+    }
+    long endAt= System.currentTimeMillis();
+    long execTime = (endAt - startAt)/1000;
+    return execTime;
   }
 }
 
