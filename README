@@ -1,3 +1,6 @@
-1、执行 `./generate_random_points.rb 300 > points` 生成300个随机点，横纵坐标均为0到200
+在命令行执行 `./generate_random_points.rb 300 > points && javac SortDistance.java && java -classpath . SortDistance > result`，打开result文件查看运行结果。
+
+说明：
+1、执行 `./generate_random_points.rb 300 > points` 生成300个随机点（横纵坐标均为0到200）并重定向到points文件中，程序从此文件中读取并解析点坐标
 2、编译SortDistance.java类。
 3、执行SortDistance，排序结果将会输出到命令行。由于记录过多，推荐利用重定向将结果输出到文件中。
